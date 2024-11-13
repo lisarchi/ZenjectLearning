@@ -1,21 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class MoveController : MonoBehaviour
+public class MoveController : ITickable
 {
     private IMoveInput _moveInput;
     private ICharacter _character;
 
-    [Inject]
-    public void Construct(ICharacter character, IMoveInput moveInput)
+    public MoveController(IMoveInput moveInput, ICharacter character)
     {
-        this._character = character;
         this._moveInput = moveInput;
-    }
+        this._character = character;
+    }   
 
-    private void Update()
+    void ITickable.Tick()
     {
         this._character.Move(this._moveInput.GetDirection(), Time.deltaTime);
     }
