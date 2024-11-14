@@ -13,5 +13,8 @@ public sealed class GameSystemInstaller : ScriptableObjectInstaller
         Container
             .Bind<GameManager>()
             .AsSingle();
+        Container
+            .BindInterfacesTo<ExitController>()
+            .AsCached();
     }
 }
